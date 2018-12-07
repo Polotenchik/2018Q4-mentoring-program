@@ -1,0 +1,12 @@
+.spinner {
+    display: none;
+    margin: auto auto;
+    height: 40px;
+    width: 40px;
+    position: relative;
+}
+
+.loading {
+    display: block;
+}
+
