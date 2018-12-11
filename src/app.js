@@ -1,18 +1,15 @@
-import Spinner from './components/spinner/spinner';
-import Header from './components/header/header';
-import ChannelList from './components/channelList/channelList';
+import { Spinner, Header, ChannelList } from 'components';
 
-class App {
+export default class App {
     constructor() {
         this.spinner = new Spinner();
         this.header = new Header();
-        this.channelListlist = new ChannelList();
-    };
+        this.list = new ChannelList(this.spinner, this.header);
+    }
 
     init() {
         this.spinner.render();
-        this.channelList.render();
-    };
+        this.header.render();
+        this.header.addNavigationBtn(this.list);
+    }
 }
-
-export default App;

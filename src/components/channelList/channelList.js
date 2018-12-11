@@ -1,18 +1,15 @@
-//import Channel from './channel';
-//import News from './news';
-//import Sender from '../api';
+import { Channel, News } from 'components';
 import { promiseDelay, ShowError} from '../../common';
+//import Sender from '../api';
+
 //import { channels } from '../../data';
 
-class ChannelList {
+export default class ChannelList {
+
     constructor(spinner, header) {
         this.spinner = spinner;
         this.header = header;
         this.listBlock = document.querySelector('.list');
-    }
-
-    renderChannels() {
-        
     }
 
     buildChannels() {
@@ -31,11 +28,20 @@ class ChannelList {
 
     toggleList() {
         this.listBlock.classList('active');
-
     }
 
-
+    renderChannels() {
+        this.toggleList();
+        this.clearList();
+        this.spinner.run();
+        this.header.toggleUnderTitle();
+        this.header.toggleLinkToChannels();
+       
+        new Promise((resolve, reject) =>{
+            if (!channels.size) {
+                reject...
+            }
+        })
+    }
 
 }
-
-export default ChannelList;
