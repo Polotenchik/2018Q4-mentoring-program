@@ -1,6 +1,6 @@
-import Spinner from './components/spinner';
-import Header from './components/header';
-import ChannelList from './components/channelList';
+import Spinner from './components/spinner/spinner';
+import Header from './components/header/header';
+import ChannelList from './components/channelList/channelList';
 
 class App {
     constructor() {

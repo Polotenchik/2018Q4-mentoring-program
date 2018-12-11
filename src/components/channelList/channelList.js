@@ -1,8 +1,8 @@
-import Channel from './channel';
-import News from './news';
-import Sender from '../api';
-import { promiseDelay, ShowError} from '../common';
-import { channels } from '../data';
+//import Channel from './channel';
+//import News from './news';
+//import Sender from '../api';
+import { promiseDelay, ShowError} from '../../common';
+//import { channels } from '../../data';
 
 class ChannelList {
     constructor(spinner, header) {

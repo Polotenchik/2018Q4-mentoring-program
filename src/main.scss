@@ -1,0 +1,54 @@
+@import './components/spinner/spinner.scss';
+
+//App parameters
+// App
+$appWidth: 1150px;
+$fontFamily: Arial, "Helvetica Neue", Helvetica, sans-serif;
+$fontSizeDefault: 14px;
+
+  // Element (button, label)
+$elementHeight: 30px; //buttons, labels
+$elementPadding: 20px;
+$elementFontSize: $fontSizeDefault;
+$textSize: 16px;
+
+
+
+$logoHeight: 25px;
+//Header
+$headerContainerWidth: $appWidth - 100px;
+$searchInputPaddingHorizontal: 20px;
+
+//Film
+$filmPosterWidth: 350px;
+$filmInfoWidth: $headerContainerWidth - $filmPosterWidth - $elementPadding*2;
+
+// Summary
+$summaryContainerWidth: $appWidth - 100px;
+
+//Colors
+
+$color_red: #F55263; // red
+$color_grey: #3C3C3C; // grey
+$color_white: #FFF; // grey
+$color_black: #000; // black
+
+
+
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+}
+
+body {
+    background: #cceecc;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
