@@ -10,8 +10,8 @@ export default class Header {
         return container;
     }
 
-    toogleLinkToChannels() {
-        this.toChannelsSection,classList.toggle('active');
+    toggleLinkToChannels() {
+        this.toChannelsSection.classList.toggle('active');
     }
 
     toggleUnderTitle() {
@@ -19,8 +19,8 @@ export default class Header {
         underTitle.classList.toggle('active');
     }
 
-    addNavigationBtn() {
-        this.toChannelsSection = document.querySelector('to-channels');
+    addNavigationBtn(callback) {
+        this.toChannelsSection = document.querySelector('.to-channels');
         this.toChannelsSection.addEventListener('click', callback);
     }
     

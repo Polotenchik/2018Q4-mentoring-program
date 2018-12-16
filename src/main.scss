@@ -1,47 +1,37 @@
-@import './components/spinner/spinner.scss';
+// Main Colors
+$sky: #30B6DD;
+$grass: #9BC837;
+$carbon: #5B5A59;
 
-//App parameters
-// App
-$appWidth: 1150px;
-$fontFamily: Arial, "Helvetica Neue", Helvetica, sans-serif;
-$fontSizeDefault: 14px;
+// Secondary Colors
+$night: #525462;
+$cobalt: #577CE6;
+$lavanda: #8A7CBB;
+$fuchsia: #CD5485;
+$fire: #FF4E33;
+$sun: #FFA21D;
+$white: #ffffff;
+$black: #000000;
+$grey: #cecfcf;
 
-  // Element (button, label)
-$elementHeight: 30px; //buttons, labels
-$elementPadding: 20px;
-$elementFontSize: $fontSizeDefault;
-$textSize: 16px;
+// Background colors
+$bg-sky: #adedf7;
 
-
-
-$logoHeight: 25px;
-//Header
-$headerContainerWidth: $appWidth - 100px;
-$searchInputPaddingHorizontal: 20px;
-
-//Film
-$filmPosterWidth: 350px;
-$filmInfoWidth: $headerContainerWidth - $filmPosterWidth - $elementPadding*2;
-
-// Summary
-$summaryContainerWidth: $appWidth - 100px;
-
-//Colors
-
-$color_red: #F55263; // red
-$color_grey: #3C3C3C; // grey
-$color_white: #FFF; // grey
-$color_black: #000; // black
-
-
-
+//Common settings
 html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 12px;
+    font-size: 12px;   
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background: #cceecc;
+    background: $bg-sky;
 }
 
 a {
@@ -52,3 +42,27 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+@mixin button() {
+    display: block;
+    padding: 15px 40px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: $carbon;
+    background: $grass;
+    cursor: pointer;
+    &:hover {
+        color: $white;
+        background: rgb(141, 175, 67);
+        transition: all 0.4s;
+    }
+}
+
+// imports
+
+@import './components/spinner/spinner.scss';
+@import './components/header/header.scss';
+@import './components/channelList/channelList.scss';

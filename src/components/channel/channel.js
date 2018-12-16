@@ -8,7 +8,7 @@ export default class Channel {
         const p = document.createElement('p');
         p.classList.add('channel');
         p.textContent = this.title;
-        p.setAttribute('data-value', value);
+        p.setAttribute('data-value', this.value);
 
         return p;
     }

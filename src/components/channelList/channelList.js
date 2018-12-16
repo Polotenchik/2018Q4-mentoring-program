@@ -1,8 +1,8 @@
-import { Channel, News } from 'components';
-import { promiseDelay, ShowError} from '../../common';
-//import Sender from '../api';
-
-//import { channels } from '../../data';
+import News from '../news/news';
+import Channel from '../channel/channel';
+import { promiseDelay, showError} from '../../common';
+import Sender from '../../api';
+import { channels } from '../../data';
 
 export default class ChannelList {
 
@@ -13,11 +13,44 @@ export default class ChannelList {
     }
 
     buildChannels() {
+       
+        const elements = [];
+        channels.forEach((value, key) => {
+            const channel = new Channel(value, key);
+            const channelBlock = channel.render();
+            this.listBlock.appendChild(channelBlock);
+            elements.push(channelBlock);
+        });
 
+        return elements;
     }
 
-    renderNews() {
+    renderNews(event) {
 
+        const { target } = event;
+        this.toggleList();
+        this.header.toggleUnderTitle();
+        this.header.toggleLinkToChannels();
+        this.spinner.run();
+
+        Sender.getNewsOnChannel(target.dataset.value)
+            .then(data => promiseDelay(2000, data))
+                .then( data => {
+                    this.clearList();
+                    data.articles.slice(0,12)
+                                 .forEach(item => {
+                                     const news = new News(item).render();
+                                     this.listBlock.appendChild(news);
+                                 });
+                })
+                    .then(() => {
+                        this.spinner.stop();
+                        this.toggleList();
+                    })
+                        .catch(err => {
+                            this.spinner.stop();
+                            showError(err);
+                        });
     }
 
     clearList() {
@@ -27,21 +60,35 @@ export default class ChannelList {
     }
 
     toggleList() {
-        this.listBlock.classList('active');
+        this.listBlock.classList.toggle('active');
     }
 
     renderChannels() {
+        
         this.toggleList();
         this.clearList();
         this.spinner.run();
         this.header.toggleUnderTitle();
         this.header.toggleLinkToChannels();
-       
-        new Promise((resolve, reject) =>{
+      
+        new Promise((resolve, reject) => {
             if (!channels.size) {
-                reject...
+                reject(new Error('No channels available'));
+               
             }
+            
+            resolve(this.buildChannels());
         })
+            .then(data => promiseDelay(2000, data))
+                .then(data => {
+                    this.spinner.stop(); 
+                    this.toggleList();
+                    data.forEach(item =>  item.addEventListener('click', this.renderNews.bind(this)));
+                })
+                    .catch(err => {
+                        this.spinner.stop();
+                        showError(err); 
+                    }); 
     }
 
 }

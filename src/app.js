@@ -1,4 +1,7 @@
-import { Spinner, Header, ChannelList } from 'components';
+import Spinner from './components/spinner/spinner'
+import Header from './components/header/header';
+import ChannelList from './components/channelList/channelList';
+import './main.scss';
 
 export default class App {
     constructor() {
@@ -10,6 +13,7 @@ export default class App {
     init() {
         this.spinner.render();
         this.header.render();
-        this.header.addNavigationBtn(this.list);
+        this.header.addNavigationBtn(this.list.renderChannels.bind(this.list));
+        this.list.renderChannels();
     }
 }

@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default class News {
     constructor(item) {
         this.description = item.description;
@@ -16,7 +18,7 @@ export default class News {
     }
 
     buildImg() {
-        const imgUrl = this.urlToImage ? this.urlToImage : '';
+        const imgUrl = this.urlToImage ? this.urlToImage : 'https://vpodarok.ru/images/2018/no_photo.png';
         const img = document.createElement('img');
         img.setAttribute('src', imgUrl);
 
@@ -29,8 +31,8 @@ export default class News {
         const h2 = document.createElement('h2');
         const p = document.createElement('p');
         const btn = this.buildBtn();
-
-        span.textContent = this.publishedAt;
+      
+        span.textContent = moment(this.publishedAt.slice(0,10)).format('MMM Do YY');
         h2.textContent = this.title;
         p.textContent = this.description;
         figcaption.appendChild(span);
