@@ -1,1 +1,1 @@
-# 2018Q4-mentoring-program
+# support browsers and ES6+ features
