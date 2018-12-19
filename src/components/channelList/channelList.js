@@ -13,15 +13,18 @@ export default class ChannelList {
     }
 
     buildChannels() {
-       
         const elements = [];
+		const fragmentChannels = document.createDocumentFragment();
+		
         channels.forEach((value, key) => {
             const channel = new Channel(value, key);
             const channelBlock = channel.render();
-            this.listBlock.appendChild(channelBlock);
-            elements.push(channelBlock);
+			elements.push(channelBlock);
+            fragmentChannels.appendChild(channelBlock);
         });
-
+	
+		this.listBlock.appendChild(fragmentChannels);
+        
         return elements;
     }
 
