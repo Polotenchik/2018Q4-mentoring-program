@@ -31,9 +31,9 @@ export default class Header {
         const btnBlock = this.biuldBtnBlock();
         h1.textContent = 'News headlines';
         small.textContent = 'Choose channels';
-        h1.append(small);
-        header.append(h1);
-        header.append(btnBlock);
+        h1.appendChild(small);
+        header.appendChild(h1);
+        header.appendChild(btnBlock);
     }
     
 }
