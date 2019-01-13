@@ -53,6 +53,7 @@
 
     figcaption {
         display: flex;
+		max-width: 90%;
         flex-direction: column;
         justify-content: space-between;
         min-height: 290px;
@@ -73,6 +74,7 @@
     p {
         margin: 5px 0 0 0;
         max-height: 75px;
+		max-width: 90%;
         overflow: hidden;
         text-align: center;
         font-size: 14px;
