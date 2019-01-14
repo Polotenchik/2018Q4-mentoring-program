@@ -1,0 +1,49 @@
+{
+  "name": "polotenchik-2018Q4-mentoring-program",
+  "version": "1.0.0",
+  "description": "news app",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "autoprefixer": "^9.4.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "css-loader": "^1.0.1",
+    "mini-css-extract-plugin": "^0.4.4",
+    "moment": "^2.23.0",
+    "node-sass": "^4.10.0",
+    "path": "^0.12.7",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.24.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "postcss": {
+	"plugins": {
+      "autoprefixer": {}
+	}
+  },
+  "browserslist": [
+	"last 2 version",
+	"not ie < 11"
+  ]
+}
