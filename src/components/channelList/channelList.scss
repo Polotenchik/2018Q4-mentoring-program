@@ -1,0 +1,87 @@
+.list {
+    display: none;
+    max-width: 1200px;
+    position: relative;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 30px auto;
+    padding: 20px;
+    overflow: hidden;
+    &.active {
+        display: flex;
+    }
+
+    .channel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        margin: 15px;
+        padding: 20px 15px;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $black;
+        background: grey;
+        cursor: pointer;
+        &:hover {
+            background:  $night;
+            color: $grass;
+            transition: all 0.4s;
+        }
+    }
+
+    figure {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        max-width: 370px;
+        min-width: 300px;
+        border-radius: 10px;
+        margin: 0 15px 35px 15px;
+        background: $night;
+    }
+
+    h2 {
+        font-weight: 500;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    figcaption {
+        display: flex;
+		max-width: 90%;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 290px;
+        overflow: hidden;
+    }
+
+    span {
+        display: block;
+        margin: 15px 0 0 0;
+        text-align: center;
+    }
+
+    img {
+        max-height: 175px;
+        min-height: 175px;
+    }
+
+    p {
+        margin: 5px 0 0 0;
+        max-height: 75px;
+		max-width: 90%;
+        overflow: hidden;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    a {
+        @include button();
+        margin: 20px auto 0 auto;
+    }
+}
