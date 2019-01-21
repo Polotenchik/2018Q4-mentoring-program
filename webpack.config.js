@@ -8,6 +8,9 @@ const conf = {
         filename: 'main.js',
         publicPath: 'dist/'
     },
+    resolveLoader: {
+        modules: ['node_modules', path.resolve(__dirname, 'custom_loader')],
+    },
     devServer: {
         overlay: true, 
         port: 5000,
@@ -22,6 +25,10 @@ const conf = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 exclude: '/node_modules'
+            },
+            {
+                test: /\.json/,
+                loader: 'json-loader'
             },
             {
                 test: /\.css$/,
