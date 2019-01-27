@@ -1,15 +1,15 @@
 import News from '../news/news';
 import Channel from '../channel/channel';
+import { LoggedSender } from '../../api'
 import { pause } from '../../common';
 import { channels } from '../../data';
 import { API_KEY, HOST, NUMBERS_OF_ARTICLES } from '../../constants';
 
 export default class ChannelList {
 
-    constructor(spinner, header, sender) {
+    constructor(spinner, header) {
         this.spinner = spinner;
         this.header = header;
-        this.sender = sender;
         this.listBlock = document.querySelector('.list');
         this.listBlock.addEventListener('click', this.goToNews.bind(this));
     }
@@ -52,7 +52,8 @@ export default class ChannelList {
         this.spinner.run();
 
         try {
-            const data = await this.sender.send(`${HOST}/v2/top-headlines?sources=${element.dataset.value}&apiKey=${API_KEY}`);
+            LoggedSender.create('GET');
+            const data = await LoggedSender.send(`${HOST}/v2/top-headlines?sources=${element.dataset.value}&apiKey=${API_KEY}`);
             await pause(1000);
             this.clearList();
 

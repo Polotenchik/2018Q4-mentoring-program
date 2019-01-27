@@ -1,6 +1,6 @@
 import { fetch as fetchPolyfill } from 'whatwg-fetch';
 
-export default class Sender {
+export class Sender {
     constructor() {
         this.requestType = 'GET';
         this.headers = new Headers();
@@ -11,13 +11,11 @@ export default class Sender {
         if (headers) {
             headers.forEach(item => this.headers.append(item.title, item.value));
         }
-
-        return this;
     }
 
     static async send(url) {
 
-        const response = await fetch(url, { method: this.requestType, headers: this.headers})
+        const response = await fetchPolyfill(url, { method: this.requestType, headers: this.headers})
                             .catch(async () => {
                                 await import('./components/modal/modal');
                             });
@@ -26,15 +24,21 @@ export default class Sender {
     }
 }
 
-// export default class Sender {
+export const LoggedSender = new Proxy(Sender, {
+    get(target, name, receiver) {
+        return Reflect.get({
+            create(requestType, headers) {
+                return target.create(requestType, headers);
+            },
+            send(url) {
+                if (target.headers) {
+                    console.log(`Headers: ${target.headers}`);
+                }
 
-//     static async getNewsOnChannel(channel) {
-   
-//         const apiKey = '0ea77f8ad02544d3b797b152f7c6bcda';
-//         const host = 'https://newsapi.org';
-//         const url = `${host}/v2/top-headlines?sources=${channel}&apiKey=${apiKey}`;
-//         const response = await fetchPolyfill(url);
-
-//         return response.json();
-//     }
-// }
+                console.log(`Request type: ${target.requestType}`);
+                console.log(`Getting data from: ${url}`);
+                return target.send(url);
+            },
+        }, name, receiver);
+    },
+});
