@@ -2,13 +2,14 @@ import News from '../news/news';
 import Channel from '../channel/channel';
 import { pause } from '../../common';
 import { channels } from '../../data';
+import { API_KEY, HOST } from '../../constants';
 
 export default class ChannelList {
 
-    constructor(spinner, header, loadNews) {
+    constructor(spinner, header, sender) {
         this.spinner = spinner;
         this.header = header;
-        this.loadNews = loadNews;
+        this.sender = sender;
         this.listBlock = document.querySelector('.list');
         this.listBlock.addEventListener('click', this.goToNews.bind(this));
     }
@@ -51,7 +52,7 @@ export default class ChannelList {
         this.spinner.run();
 
         try {
-            const data = await this.loadNews(element.dataset.value);
+            const data = await this.sender.send(`${HOST}/v2/top-headlines?sources=${element.dataset.value}&apiKey=${API_KEY}`);
             await pause(1000);
             this.clearList();
 

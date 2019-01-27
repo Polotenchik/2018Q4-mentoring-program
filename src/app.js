@@ -18,7 +18,7 @@ export default class App {
 
         const listModule = await import('./components/channelList/channelList');
         const List = listModule.default;
-        const list = new List(this.spinner, this.header, Sender.getNewsOnChannel);
+        const list = new List(this.spinner, this.header, Sender.create('GET'));
 
         this.header.addNavigationBtn(list.renderChannels.bind(list));
         list.renderChannels();
