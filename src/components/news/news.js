@@ -13,6 +13,7 @@ export default class News {
         const anchor = document.createElement('a');
         anchor.textContent = 'Read';
         anchor.href = this.url;
+        anchor.target = '_blank';
 
         return anchor;
     }

@@ -2,7 +2,7 @@ import News from '../news/news';
 import Channel from '../channel/channel';
 import { pause } from '../../common';
 import { channels } from '../../data';
-import { API_KEY, HOST } from '../../constants';
+import { API_KEY, HOST, NUMBERS_OF_ARTICLES } from '../../constants';
 
 export default class ChannelList {
 
@@ -56,7 +56,7 @@ export default class ChannelList {
             await pause(1000);
             this.clearList();
 
-            data.articles.slice(0, 12)
+            data.articles.slice(0, NUMBERS_OF_ARTICLES)
                 .forEach((item) => {
                     const news = new News(item).render();
                     this.listBlock.appendChild(news);
