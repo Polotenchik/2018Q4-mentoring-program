@@ -3,9 +3,9 @@ const store = {
     news: [],
 };
 
-export const storeProxy = new Proxy( store, {
+export const storeProxy = new Proxy(store, {
     get(target, prop) {
-        cosole.log({
+        console.log({
             type: 'get',
             target,
             prop,
@@ -15,13 +15,13 @@ export const storeProxy = new Proxy( store, {
     },
 
     set(target, prop, value) {
-        cosole.log({
+        console.log({
             type: 'set',
             target,
             prop,
             value
         });
 
-        return Reflect.get(target, prop, value);        
+        return Reflect.set(target, prop, value);        
     },
 });

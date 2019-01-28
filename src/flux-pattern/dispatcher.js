@@ -4,10 +4,12 @@ import { storeProxy } from './store';
 export const dispatch = (action) => {
     switch(action.type) {
         case UPDATE_CHANNELS:
-            return storeProxy.channels = action.payload;
+            storeProxy.channels = action.payload;
+            break;
         case UPDATE_NEWS:
-            return storeProxy.news = action.payload;
+            storeProxy.news = action.payload;
+            break;
         default: 
-            return storeProxy;
+            break;
     }
 }

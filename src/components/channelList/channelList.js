@@ -2,7 +2,10 @@ import News from '../news/news';
 import Channel from '../channel/channel';
 import { LoggedSender } from '../../api'
 import { pause } from '../../common';
-import { channels } from '../../data';
+import { storeProxy } from '../../flux-pattern/store';
+import { dispatch } from '../../flux-pattern/dispatcher';
+import { Actions } from '../../flux-pattern/actions';
+import { UPDATE_CHANNELS, UPDATE_NEWS } from '../../flux-pattern/actionTypes';
 import { API_KEY, HOST, NUMBERS_OF_ARTICLES } from '../../constants';
 
 export default class ChannelList {
@@ -19,7 +22,7 @@ export default class ChannelList {
         const elements = [];
         const fragmentChannels = document.createDocumentFragment();
 
-        channels.forEach((value, key) => {
+        storeProxy.channels.forEach((value, key) => {
             const channel = new Channel(value, key);
             const channelBlock = channel.render();
             elements.push(channelBlock);
@@ -36,7 +39,7 @@ export default class ChannelList {
 
         while (target !== this.listBlock) {
             if (target.tagName === 'P') {
-                this.renderNews(target);
+                this.getNews(target);
                 return;
             }
 
@@ -44,7 +47,15 @@ export default class ChannelList {
         }
     }
 
-    async renderNews(element) {
+    renderNews() {
+        storeProxy.news.slice(0, NUMBERS_OF_ARTICLES)
+                .forEach(item => {
+                    const news = new News(item).render();
+                    this.listBlock.appendChild(news);
+                });
+    }
+
+    async getNews(element) {
 
         this.toggleList();
         this.header.toggleUnderTitle();
@@ -55,14 +66,9 @@ export default class ChannelList {
             LoggedSender.create('GET');
             const data = await LoggedSender.send(`${HOST}/v2/top-headlines?sources=${element.dataset.value}&apiKey=${API_KEY}`);
             await pause(1000);
+            this.fillNews(data.articles);
             this.clearList();
-
-            data.articles.slice(0, NUMBERS_OF_ARTICLES)
-                .forEach((item) => {
-                    const news = new News(item).render();
-                    this.listBlock.appendChild(news);
-                });
-
+            this.renderNews();
             this.spinner.stop();
             this.toggleList();
         } catch (err) {
@@ -84,7 +90,7 @@ export default class ChannelList {
 
     async renderChannels() {
 
-        if (!channels || !channels.size) {
+        if (!storeProxy.channels || !storeProxy.channels.size) {
             await import('../modal/modal');
             this.spinner.stop();
             return;
@@ -101,4 +107,8 @@ export default class ChannelList {
         this.toggleList();
     }
 
+    fillNews(news) {
+        const updateChannelsAction = new Actions(UPDATE_NEWS, news);
+        dispatch(updateChannelsAction);
+    }
 }

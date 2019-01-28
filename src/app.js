@@ -1,6 +1,10 @@
 import Spinner from './components/spinner/spinner'
 import Header from './components/header/header';
 import LoadButton from './components/loadButton/loadButton';
+import { channels } from './data';
+import { dispatch } from './flux-pattern/dispatcher';
+import { Actions } from './flux-pattern/actions';
+import { UPDATE_CHANNELS } from './flux-pattern/actionTypes';
 import './main.scss';
 
 export default class App {
@@ -23,7 +27,13 @@ export default class App {
         list.renderChannels();
     }
 
+    fillChannels() {
+        const updateChannelsAction = new Actions(UPDATE_CHANNELS, channels);
+        dispatch(updateChannelsAction);
+    }
+
     init() {
         this.loadBtn.render();
+        this.fillChannels();
     }
 }
