@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const { Router } = require('express');
 const controller = require('./utils/create-controller');
 
-module.exports = () => {
+module.exports = ({ logger }) => {
     const router = Router();
 
     router.use(cors({
@@ -16,6 +16,7 @@ module.exports = () => {
     router.use('/news', controller('news'));
 
     router.use((err, req, res, next) => {
+        logger.error(err);
         res.status(Status.INTERNAL_SERVER_ERROR).send(err.message);
     });
 

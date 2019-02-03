@@ -2,3 +2,18 @@ const { createContainer, asValue, asFunction } = require('awilix');
 
 const app = require('./app/app');
 const config = require('./config');
+const router = require('./interfaces/http/router');
+const server = require('./interfaces/http/server');
+const logger = require('./logger');
+
+const container = createContainer();
+
+container.register({
+    app: asFunction(app).singleton(),
+    server: asFunction(app).singleton(),
+    router: asFunction(app).singleton(),
+    config: asValue(config),
+    logger: asValue(logger),
+});
+
+module.exports = container;
