@@ -12,8 +12,9 @@ container.register({
     app: asFunction(app).singleton(),
     server: asFunction(server).singleton(),
     router: asFunction(router).singleton(),
-    config: asValue(config),
     logger: asValue(logger),
+    config: asValue(config),
+
 });
 
 module.exports = container;

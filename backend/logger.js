@@ -1,8 +1,8 @@
 const fs = require('fs');
 const winston = require('winston');
 
-if (fs.existsSync('logs')) {
-    fs.mkdir('logs');
+if (!fs.existsSync('logs')) {
+    fs.mkdirSync('logs');
 }
 
 const customFormat = winston.format.printf((info) => {

@@ -8,7 +8,7 @@ module.exports = ({ logger }) => {
     const router = Router();
 
     router.use(cors({
-        origin: ['http://localhost:3000'],
+        origin: ['http://localhost:4000'],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
     })).use(bodyParser.json());
 

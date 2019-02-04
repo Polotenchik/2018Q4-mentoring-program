@@ -7,6 +7,8 @@ module.exports = ({ config, router }) => {
 
     return {
         app,
-        start: () => app.listen(config.port),
+        start: () => app.listen(config.port, () => {
+            console.log(`Server listening on PORT ${config.port}`)
+        }),
     };
 }
