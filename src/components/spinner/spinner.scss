@@ -1,0 +1,44 @@
+.spinner {
+    width: 90px;
+    height: 30px;
+    text-align: center;
+    display: none;
+    margin: 40vh auto;
+    &.loading {
+        display: block;
+    }
+}
+  
+.spinner-dot {
+    background-color: $night;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    opacity: 0.5;
+    margin: 0 3px;
+    animation: jump 0.8s infinite ease-in-out both;
+}
+  
+.spinner-dot:nth-child(1) {
+    animation-delay: -0.2s;
+}
+  
+.spinner-dot:nth-child(2) {
+    animation-delay: -0.1s;
+}
+  
+@keyframes jump {
+    0% {
+      transform: translateY(0);
+    }  
+    
+    66% {
+      transform: translateY(15px);
+    } 
+    
+    100% {
+      transform: translateY(0);
+    } 
+}
+
