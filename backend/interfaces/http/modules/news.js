@@ -1,81 +1,52 @@
 const Status = require('http-status');
 const { Router } = require('express');
-const { compose } = require('ramda');
-const container = require('../../../container');
 const logger = require('../../../logger');
-const newsRepo = require('../../../repos/news');
-const { get, post, put, remove } = require('../../../app/news');
+const { get, remove, post, put } = require('../../../app/methods')
 
 module.exports = () => {
     const router = Router();
 
-    const { database } = container.cradle;
-    const newsUseCase = compose(newsRepository)(database);
-
-    const getUseCase = get({ newsRepository: newsUseCase });
-    const postUseCase = post({ newsRepository: newsUseCase });
-    const putUseCase = put({ newsRepository: newsUseCase });
-    const deleteUseCase = remove({ newsRepository: newsUseCase });
-
     router.get('/', (req, res) => {
         logger.info('Getting all news');
-
-        getUseCase
-            .getAll(req, res)
-            .then(data => res.status(Status.OK).json(data))
-            .catch((error) => {
-                logger.error(error);
-                res.status(Status.BAD_REQUEST).json(error.message);
-            });
+        get()
+        .then(data => res.status(Status.OK).json(data))
+        .catch(err => { 
+            logger.error(err);
+            res.status(Status.BAD_REQUEST).json(err.message);
+        });
     });
 
     router.get('/:id', (req, res) => {
         logger.info(`Getting news by id ${req.params.id}`);
-
-        getUseCase
-            .findById(req, res)
-            .then(data => res.status(Status.OK).json(data))
-            .catch((error) => {
-                logger.error(error);
-                res.status(Status.BAD_REQUEST).json(error.message);
-            });
+        get(req.params.id)
+        .then(data => res.status(Status.OK).json(data))
+        .catch(err => { 
+            logger.error(err);
+            res.status(Status.BAD_REQUEST).json(err.message);
+        });
     });
 
     router.delete('/:id', (req, res) => {
         logger.info(`Deleting news by id ${req.params.id}`);
-
-        deleteUseCase
-            .deleteById(req, res)
-            .then(data => res.status(Status.OK).json(data))
-            .catch((error) => {
-                logger.error(error);
-                res.status(Status.BAD_REQUEST).json(error.message);
-            });
+        remove(req.params.id)
+        .then(data => res.status(Status.OK).json(data))
+        .catch(err => { 
+            logger.error(err);
+            res.status(Status.BAD_REQUEST).json(err.message);
+        })
     });
 
     router.put('/:id', (req, res) => {
         logger.info(`Updating news by id ${req.params.id}`);
-
-        putUseCase
-            .updateById(req, res)
-            .then(data => res.status(Status.OK).json(data))
-            .catch((error) => {
-                logger.error(error);
-                res.status(Status.BAD_REQUEST).json(error.message);
-            });
+        const item = { id : req.params.id }
+        res.status(Status.OK).json(item);
     });
 
     router.post('/', (req, res) => {
-        logger.info('Creating new news');
-
-        postUseCase
-            .create(req, res)
-            .then(data => res.status(Status.OK).json(data))
-            .catch((error) => {
-                logger.error(error);
-                res.status(Status.BAD_REQUEST).json(error.message);
-            });
+        logger.info(`Adding news`);
+        const item = { id : req.params.id }
+        res.status(Status.OK).json(item);
     });
 
     return router;
-};
+} 

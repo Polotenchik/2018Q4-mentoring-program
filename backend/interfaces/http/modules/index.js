@@ -5,7 +5,7 @@ module.exports = () => {
     const router = Router();
 
     router.get('/', (req, res) => {
-        res.status(Status.OK).json({ status: 'Start'});
+        res.status(Status.OK).json({ status: 'Start work'});
     });
 
     return router;
