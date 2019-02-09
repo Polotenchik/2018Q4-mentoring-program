@@ -1,17 +1,24 @@
-const mockNews = require('../../data.json');
+module.exports = ({ newsRepo }) => {
+    const getAll = () => {
+        return Promise
+            .resolve()
+            .then(() => newsRepo.getAll())
+            .catch(err => {
+                throw new Error(err);
+            });
+    };
 
-const get = (id) => {
-    return new Promise((resolve, reject) => {
-        try {
-            if (id) {
-                resolve(mockNews.find(item => item.id === id ));
-            } else {
-                resolve(mockNews);
-            }
-        } catch(err) {
-            reject(err);
-        }
-    });
+    const findById = (req) => {
+        return Promise
+            .resolve()
+            .then(() => newsRepo.findById(req.params.id))
+            .catch(err => {
+                throw new Error(err);
+            });
+    }
+
+    return {
+        getAll,
+        findById,
+    }
 };
-
-module.exports = get;
