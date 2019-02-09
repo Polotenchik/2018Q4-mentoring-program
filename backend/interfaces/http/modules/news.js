@@ -38,14 +38,22 @@ module.exports = () => {
 
     router.put('/:id', (req, res) => {
         logger.info(`Updating news by id ${req.params.id}`);
-        const item = { id : req.params.id }
-        res.status(Status.OK).json(item);
+        put(req.params.id)
+        .then(data => res.status(Status.OK).json(data))
+        .catch(err => { 
+            logger.error(err);
+            res.status(Status.BAD_REQUEST).json(err.message);
+        });
     });
 
     router.post('/', (req, res) => {
         logger.info(`Adding news`);
-        const item = { id : req.params.id }
-        res.status(Status.OK).json(item);
+        post(req)
+        .then(data => res.status(Status.OK).json(data))
+        .catch(err => { 
+            logger.error(err);
+            res.status(Status.BAD_REQUEST).json(err.message);
+        })
     });
 
     return router;
