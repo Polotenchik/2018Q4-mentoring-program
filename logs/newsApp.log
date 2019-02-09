@@ -12,3 +12,17 @@
 2019-02-04T19:47:53.106Z [News App] info: Updating news by id 2
 2019-02-04T19:48:00.798Z [News App] info: Adding news
 2019-02-04T19:48:21.439Z [News App] info: Deleting news by id 4
+2019-02-09T11:07:52.017Z [News App] info: Getting all news
+2019-02-09T11:08:17.350Z [News App] info: Getting news by id 1
+2019-02-09T11:08:22.772Z [News App] info: Getting news by id 4
+2019-02-09T11:09:32.585Z [News App] info: Getting news by id 9
+2019-02-09T11:10:28.515Z [News App] info: Getting news by id 5
+2019-02-09T11:10:39.767Z [News App] info: Getting news by id 3
+2019-02-09T13:09:05.227Z [News App] info: Getting news by id 3
+2019-02-09T13:09:10.647Z [News App] info: Getting all news
+2019-02-09T13:10:23.129Z [News App] info: Updating news by id 1
+2019-02-09T13:11:28.726Z [News App] info: Updating news by id 1
+2019-02-09T13:11:48.869Z [News App] info: Deleting news by id 1
+2019-02-09T13:12:04.540Z [News App] info: Getting all news
+2019-02-09T13:13:35.309Z [News App] info: Creating news
+2019-02-09T13:13:43.036Z [News App] info: Getting all news

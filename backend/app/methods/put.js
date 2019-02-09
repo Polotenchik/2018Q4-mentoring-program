@@ -1,11 +1,14 @@
-const put = (id) => {
-    return new Promise((resolve, reject) => {
-        try {
-            resolve(id);
-        } catch(err) {
-            reject(err);
-        }
-    });
-};
+module.exports = ({ newsRepo }) => {
+    const updateById = (id) => {
+        return Promise
+            .resolve()
+            .then(() => newsRepo.updateById())
+            .catch(err => {
+                throw new Error(err);
+            });
+    }
 
-module.exports = put;
+    return {
+        updateById,
+    }
+};

@@ -1,11 +1,14 @@
-const remove = (id) => {
-    return new Promise((resolve, reject) => {
-        try {
-            resolve(id);
-        } catch(err) {
-            reject(err);
-        }
-    });
-};
+module.exports = ({ newsRepo }) => {
+    const deleteById = () => {
+        return Promise
+            .resolve()
+            .then(() => newsRepo.deleteById())
+            .catch(err => {
+                throw new Error(err);
+            });
+    }
 
-module.exports = remove;
+    return {
+        deleteById,
+    }
+};

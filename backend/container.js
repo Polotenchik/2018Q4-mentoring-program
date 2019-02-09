@@ -15,7 +15,7 @@ container.register({
     router: asFunction(router).singleton(),
     logger: asValue(logger),
     config: asValue(config),
-    db: asValue(mockNews),
+    database: asValue(mockNews),
 
 });
 
