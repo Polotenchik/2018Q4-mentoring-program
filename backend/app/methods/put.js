@@ -1,8 +1,8 @@
 module.exports = ({ newsRepo }) => {
-    const updateById = (id) => {
+    const updateById = (req) => {
         return Promise
             .resolve()
-            .then(() => newsRepo.updateById())
+            .then(() => newsRepo.updateById(req.params.id))
             .catch(err => {
                 throw new Error(err);
             });
