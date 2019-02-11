@@ -1,2 +1,0 @@
-export const UPDATE_CHANNELS = 'UPDATE_CHANNELS';
-export const UPDATE_NEWS = 'UPDATE_NEWS';
