@@ -1,11 +1,6 @@
 module.exports = ({ newsRepo }) => {
-    const deleteById = (req) => {
-        return Promise
-            .resolve()
-            .then(() => newsRepo.deleteById(req.params.id))
-            .catch(err => {
-                throw new Error(err);
-            });
+    const deleteById = req => {
+        newRepo.deleteById(req.params.id)
     }
 
     return {

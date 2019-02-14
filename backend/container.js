@@ -5,7 +5,8 @@ const config = require('./config');
 const router = require('./interfaces/http/router');
 const server = require('./interfaces/http/server');
 const logger = require('./logger');
-const mockNews = require('./data.json');
+const database = require('./database');
+const { News } = require('./database/models');
 
 const container = createContainer();
 
@@ -15,7 +16,8 @@ container.register({
     router: asFunction(router).singleton(),
     logger: asValue(logger),
     config: asValue(config),
-    database: asValue(mockNews),
+    database: asFunction(database).singleton(),
+    newsModel: asFunction(News).singleton(),
 
 });
 

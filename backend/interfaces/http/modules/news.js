@@ -9,8 +9,8 @@ const newsRepo = require('../../../repos');
 module.exports = () => {
     const router = Router();
 
-    const { database } = container.cradle;
-    const newsUseCase = compose(newsRepo)(database);
+    const { newsModel } = container.cradle;
+    const newsUseCase = compose(newsRepo)(newsModel);
 
     const getUseCase = get({ newsRepo: newsUseCase });
     const postUseCase = post({ newsRepo: newsUseCase });

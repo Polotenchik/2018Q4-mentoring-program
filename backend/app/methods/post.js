@@ -1,11 +1,6 @@
 module.exports = ({ newsRepo }) => {
-    const create = () => {
-        return Promise
-            .resolve()
-            .then(() => newsRepo.create())
-            .catch((err) => {
-                throw new Error(err);
-            });
+    const create = req => {
+        newsRepo.create(req.body);
     };
 
     return {
