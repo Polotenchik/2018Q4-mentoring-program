@@ -1,3 +1,6 @@
-module.exports = ({ server }) => ({
-    start: () => Promise.resolve().then(server.start),
-})
+module.exports = ({ server, database }) => ({
+    start: () => Promise
+        .resolve()
+        .then(database.connect)
+        .then(server.start),
+});
