@@ -1,28 +1,27 @@
-const { News, Source } = require('../domain');
-
-module.exports = (model) => {
-    const getAll = () => model;
-    const findById = id => model.find(item => item.id === id);
+module.exports = (Model) => {
+    const getAll = () => {
+        return Model.find({}).then(res => res);    
+    };
+    const findById = id => {
+        return Model.findById(id).then(res => res);
+    };
     const deleteById = id => {
-        return { status: `Item with id ${id} was deleted successful` };
+        return Model.findOneAndDelete({ _id: id }).then(res => {
+            return { status: `Item with id ${res._id} deleted`}
+        });
     };
-    const updateById = id => {
-        return { status: `Item with id ${id} was updated successful` };
+    const updateById = (id, body) => {
+        return Model.findByIdAndUpdate(id, body, { 'new': true }).then(res => {
+            return { status: `Item with id ${res._id} updated`}; 
+        });
     };
 
-    const create = () => {
-        const news = new News(5);
-        const source = new Source('bbc', 'BBC-NEWS');
+    const create = (body) => {
+        const newItem =new Model(body);
 
-        news.addAuthor('John Doe')
-            .addContent('Lorem ipsum dolor sit...')
-            .addDescription('Lorem ipsum dolor sit')
-            .addSource(source)
-            .addTitle('Sit apre dolor lorem')
-            .addPublishDate('2019-02-05T08:26:33Z')
-            .addUrlToImage('https://ichef.bbci.co.uk/news/1024/branded_news/32D8/production/_105461031_hi052073606.jpg');
-
-        return news;
+        return newItem.save().then(res => {
+            return { status: `Item ${res._id} added to News`}; 
+        });
     };
 
     return {
@@ -32,9 +31,4 @@ module.exports = (model) => {
         updateById,
         create,
     };
-
-    return {
-        getAll,
-        findById,
-    }
 }

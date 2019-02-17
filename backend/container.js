@@ -6,7 +6,7 @@ const router = require('./interfaces/http/router');
 const server = require('./interfaces/http/server');
 const logger = require('./logger');
 const database = require('./database');
-const { News } = require('./database/models');
+const { News,  } = require('./database/models');
 
 const container = createContainer();
 
