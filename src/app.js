@@ -1,10 +1,7 @@
 import Spinner from './components/spinner/spinner'
 import Header from './components/header/header';
 import LoadButton from './components/loadButton/loadButton';
-import { channels } from './data';
-import { dispatch } from './flux-pattern/dispatcher';
-import { Actions } from './flux-pattern/actions';
-import { UPDATE_CHANNELS } from './flux-pattern/actionTypes';
+import Sender from './api';
 import './main.scss';
 
 export default class App {
@@ -21,19 +18,14 @@ export default class App {
 
         const listModule = await import('./components/channelList/channelList');
         const List = listModule.default;
-        const list = new List(this.spinner, this.header);
+        const list = new List(this.spinner, this.header, Sender.getNewsOnChannel);
 
         this.header.addNavigationBtn(list.renderChannels.bind(list));
         list.renderChannels();
     }
 
-    fillChannels() {
-        const updateChannelsAction = new Actions(UPDATE_CHANNELS, channels);
-        dispatch(updateChannelsAction);
-    }
 
     init() {
         this.loadBtn.render();
-        this.fillChannels();
     }
 }
